@@ -2,6 +2,7 @@ from __future__ import print_function
 import torch
 import numpy as np
 
+
 def diff_mse(x, y):
     x_vec = x.view(1, -1).squeeze()
     y_vec = y.view(1, -1).squeeze()
@@ -9,8 +10,6 @@ def diff_mse(x, y):
 
 
 def conv2d_scalar(x_in, conv_weight, conv_bias, device, progress=False):
-    # x_in, conv_weight, conv_bias = x_in.to(
-    #     device), conv_weight.to(device), conv_bias.to(device)
     N_batch, C_in, S_in, _ = x_in.size()
     C_out, _, K, _ = conv_weight.size()
     S_out = S_in - K + 1
@@ -149,7 +148,6 @@ def pool2d_vector(a, device):
 
 
 def relu_scalar(a, device, progress=False):
-    # a = a.to(device)
     N_batch, S_in = a.size()
     a_out = torch.zeros(N_batch, S_in).to(device)
     for n in range(N_batch):
@@ -175,7 +173,6 @@ def reshape_vector(a, device):
 
 
 def reshape_scalar(a, device, progress=False):
-    # a = a.to(device)
     N_batch, C_in, S_in, _ = a.size()
     S_out = C_in*S_in**2
     a_out = torch.zeros(N_batch, S_out).to(device)
@@ -191,7 +188,6 @@ def reshape_scalar(a, device, progress=False):
 
 
 def fc_layer_scalar(a, weight, bias, device, progress=False):
-    # a, weight, bias = a.to(device), weight.to(device), bias.to(device)
     N_batch, S_in = a.size()
     S_out = bias.size(0)
     a_out = torch.zeros(N_batch, S_out).to(device)
@@ -206,7 +202,6 @@ def fc_layer_scalar(a, weight, bias, device, progress=False):
 
 
 def fc_layer_vector(a, weight, bias, device):
-    # a, weight, bias = a.to(device), weight.to(device), bias.to(device)
     N_batch, В = a.size()
     S_out = bias.size(0)
     a_out = torch.empty(N_batch, S_out).to(device)
